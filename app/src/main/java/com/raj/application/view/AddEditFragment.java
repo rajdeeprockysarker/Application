@@ -1,4 +1,4 @@
-package com.raj.application;
+package com.raj.application.view;
 
 import android.os.Bundle;
 
@@ -15,14 +15,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.raj.application.R;
 import com.raj.application.ViewModel.AddEditFragmentViewModel;
-import com.raj.application.ViewModel.ListFragmentViewModel;
-import com.raj.application.adapter.UserListAdapter;
 import com.raj.application.databinding.FragmentAddEditBinding;
-import com.raj.application.databinding.FragmentAddEditBindingImpl;
 import com.raj.application.db.User;
-
-import java.util.ArrayList;
 
 
 public class AddEditFragment extends Fragment {

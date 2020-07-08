@@ -1,4 +1,4 @@
-package com.raj.application;
+package com.raj.application.contract;
 
 import com.raj.application.db.User;
 

@@ -1,4 +1,4 @@
-package com.raj.application;
+package com.raj.application.view;
 
 import android.os.Bundle;
 
@@ -16,7 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.raj.application.Repo.Repository;
+import com.raj.application.contract.OnRecyclerItemClickListener;
+import com.raj.application.R;
 import com.raj.application.ViewModel.ListFragmentViewModel;
 
 import com.raj.application.adapter.UserListAdapter;

@@ -1,4 +1,4 @@
-package com.raj.application;
+package com.raj.application.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 
-import com.raj.application.db.User;
+import com.raj.application.R;
 
 public class MainActivity extends AppCompatActivity {
 

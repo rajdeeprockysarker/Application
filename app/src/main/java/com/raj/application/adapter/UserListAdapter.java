@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.raj.application.R;
 import com.raj.application.db.User;
-import com.raj.application.OnRecyclerItemClickListener;
+import com.raj.application.contract.OnRecyclerItemClickListener;
 
 import java.util.List;
 
