@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.raj.application.Repo.Repository;
 import com.raj.application.ViewModel.ListFragmentViewModel;
 
 import com.raj.application.adapter.UserListAdapter;
@@ -76,11 +77,22 @@ public class ListFragment extends Fragment implements OnRecyclerItemClickListene
             }
         });
 
+        listFragmentViewModel.userInitialList.observe(this, new Observer() {
+            @Override
+            public void onChanged(Object userList) {
+                Log.v("","");
+
+                ArrayList<User> mUlerListInsideObserver=(ArrayList<User>)userList;
+                mAdapter = new UserListAdapter(ListFragment.this,mUlerListInsideObserver);
+                recyclerView.setAdapter(mAdapter);
+            }
+        });
+
 //        User user = new User();
 //        user.setName("Raj12345678978978979797887");
 //        user.setEmail("Raj");
 //
-//        listFragmentViewModel.setUserId(user);
+        listFragmentViewModel.getInitialData(true);
 
 
         fab_add.setOnClickListener(new View.OnClickListener() {
@@ -90,34 +102,9 @@ public class ListFragment extends Fragment implements OnRecyclerItemClickListene
             }
         });
 
-
     }
 
-    private void prepareMovieData() {
-        User user = new User();
-        user.setName("123");
-        user.setEmail("123");
-        userList.add(user);
 
-        User user1 = new User();
-        user1.setName("425");
-        user1.setEmail("425");
-        userList.add(user1);
-
-        User user2 = new User();
-        user2.setName("987");
-        user2.setEmail("987");
-        userList.add(user2);
-
-        User user3 = new User();
-        user3.setName("456");
-        user3.setEmail("456");
-        userList.add(user3);
-
-
-
-        mAdapter.notifyDataSetChanged();
-    }
 
 
     @Override

@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     public void jumpAddEditFragment(int position){
 
         Bundle args = new Bundle();
-        args.putInt("YourKey", position);
+        args.putInt("position", position);
 
 
         Fragment mFragment = null;

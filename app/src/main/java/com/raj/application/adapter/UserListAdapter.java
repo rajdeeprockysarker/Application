@@ -47,7 +47,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        User user = usersList.get(position);
+        final User user = usersList.get(position);
         holder.name.setText(user.getName());
         holder.email.setText(user.getEmail());
 
@@ -55,7 +55,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
             @Override
             public void onClick(View v) {
                 Log.v("pos","poos"+position);
-                minter.onClickItem(position);
+                minter.onClickItem(user.getUid());
             }
         });
 

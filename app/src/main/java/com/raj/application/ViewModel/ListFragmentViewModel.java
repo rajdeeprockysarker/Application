@@ -18,6 +18,7 @@ import com.raj.application.db.User;
 public class ListFragmentViewModel extends AndroidViewModel {
 
     private MutableLiveData<User> insertUser= new MutableLiveData<>();
+    private MutableLiveData<Boolean> getinitialData= new MutableLiveData<>();
     Context cntx;
     AppDatabase db;
 
@@ -26,6 +27,15 @@ public class ListFragmentViewModel extends AndroidViewModel {
         @Override
         public Object apply(Object user) {
              new Repository().insertData(db,insertUser.getValue());
+            return new Repository().getListData(db);
+        }
+    });
+
+
+    public LiveData userInitialList = Transformations.map(getinitialData, new Function() {
+        @Override
+        public Object apply(Object user) {
+
             return new Repository().getListData(db);
         }
     });
@@ -44,6 +54,13 @@ public class ListFragmentViewModel extends AndroidViewModel {
         }
         insertUser.postValue(mUser);
 
+    }
+
+    public void getInitialData(Boolean initialData){
+        if(getinitialData==null){
+            getinitialData= new MutableLiveData<>();
+        }
+        getinitialData.postValue(initialData);
     }
 
 }

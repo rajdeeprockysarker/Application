@@ -18,4 +18,10 @@ public class Repository {
         db.userDao().insertAll(mUser);
     }
 
+
+    public User getListData(AppDatabase db,int id){
+
+        return db.userDao().findUserByUID(id);
+    }
+
 }

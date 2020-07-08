@@ -25,4 +25,7 @@ public interface UserDao {
 
     @Delete
     void delete(User user);
+
+    @Query("SELECT * FROM user where uid =:uid")
+    User findUserByUID(int uid);
 }
