@@ -21,10 +21,13 @@ import com.raj.application.R;
 import com.raj.application.ViewModel.ListFragmentViewModel;
 
 import com.raj.application.adapter.UserListAdapter;
+import com.raj.application.db.AppDatabase;
 import com.raj.application.db.User;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 public class ListFragment extends Fragment implements OnRecyclerItemClickListener {
 
@@ -34,6 +37,9 @@ public class ListFragment extends Fragment implements OnRecyclerItemClickListene
     private UserListAdapter mAdapter;
     private ListFragmentViewModel listFragmentViewModel;
     private FloatingActionButton fab_add;
+
+    @Inject
+    AppDatabase db;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
