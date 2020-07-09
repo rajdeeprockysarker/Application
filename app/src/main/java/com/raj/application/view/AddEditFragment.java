@@ -18,6 +18,7 @@ import android.widget.EditText;
 import com.raj.application.R;
 import com.raj.application.ViewModel.AddEditFragmentViewModel;
 import com.raj.application.databinding.FragmentAddEditBinding;
+import com.raj.application.db.AppDatabase;
 import com.raj.application.db.User;
 
 
@@ -33,6 +34,12 @@ public class AddEditFragment extends Fragment {
     private User mUser;
     private boolean edit=false;
     FragmentAddEditBinding binding;
+
+    private AppDatabase db;
+
+    public AddEditFragment(AppDatabase db) {
+        this.db=db;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -101,12 +108,12 @@ public class AddEditFragment extends Fragment {
                 mUser.setName(edt_name.getText().toString());
                 mUser.setEmail(edt_email.getText().toString());
                 update=true;
-                listFragmentViewModel.setUser(mUser);
+                listFragmentViewModel.setUser(mUser,db);
             }
         });
 
         if(edit){
-            listFragmentViewModel.setUserId(value);
+            listFragmentViewModel.setUserId(value,db);
         }
 
     }

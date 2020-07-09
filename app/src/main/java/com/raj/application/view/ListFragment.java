@@ -37,9 +37,11 @@ public class ListFragment extends Fragment implements OnRecyclerItemClickListene
     private UserListAdapter mAdapter;
     private ListFragmentViewModel listFragmentViewModel;
     private FloatingActionButton fab_add;
+    private AppDatabase db;
 
-    @Inject
-    AppDatabase db;
+    public ListFragment(AppDatabase db) {
+        this.db=db;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -99,7 +101,7 @@ public class ListFragment extends Fragment implements OnRecyclerItemClickListene
 //        user.setName("Raj12345678978978979797887");
 //        user.setEmail("Raj");
 //
-        listFragmentViewModel.getInitialData(true);
+        listFragmentViewModel.getInitialData(true,db);
 
 
         fab_add.setOnClickListener(new View.OnClickListener() {

@@ -42,24 +42,26 @@ public class AddEditFragmentViewModel extends AndroidViewModel {
 
         super(application);
         cntx=application.getApplicationContext();
-        db= (AppDatabase) AppDatabase.getAppDatabase(cntx);
+       // db= (AppDatabase) AppDatabase.getAppDatabase(cntx);
     }
 
-    public void setUser(User mUser){
+    public void setUser(User mUser,AppDatabase db){
 
         if(insertUpdateUser==null){
             insertUpdateUser= new MutableLiveData<>();
         }
+        this.db=db;
         insertUpdateUser.postValue(mUser);
 
     }
 
 
-    public void setUserId(int id){
+    public void setUserId(int id,AppDatabase db){
 
         if(userId==null){
             userId= new MutableLiveData<>();
         }
+        this.db=db;
         userId.postValue(id);
 
     }

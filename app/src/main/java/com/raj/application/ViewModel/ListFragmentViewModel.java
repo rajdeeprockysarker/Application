@@ -15,12 +15,15 @@ import com.raj.application.Repo.Repository;
 import com.raj.application.db.AppDatabase;
 import com.raj.application.db.User;
 
+import javax.inject.Inject;
+
 public class ListFragmentViewModel extends AndroidViewModel {
 
     private MutableLiveData<User> insertUser= new MutableLiveData<>();
     private MutableLiveData<Boolean> getinitialData= new MutableLiveData<>();
     Context cntx;
     AppDatabase db;
+
 
 
     public LiveData userList = Transformations.map(insertUser, new Function() {
@@ -44,22 +47,14 @@ public class ListFragmentViewModel extends AndroidViewModel {
 
         super(application);
         cntx=application.getApplicationContext();
-        db= (AppDatabase) AppDatabase.getAppDatabase(cntx);
+       // db= (AppDatabase) AppDatabase.getAppDatabase(cntx);
     }
 
-    public void setUserId(User mUser){
-
-        if(insertUser==null){
-            insertUser= new MutableLiveData<>();
-        }
-        insertUser.postValue(mUser);
-
-    }
-
-    public void getInitialData(Boolean initialData){
+    public void getInitialData(Boolean initialData,AppDatabase db){
         if(getinitialData==null){
             getinitialData= new MutableLiveData<>();
         }
+        this.db=db;
         getinitialData.postValue(initialData);
     }
 

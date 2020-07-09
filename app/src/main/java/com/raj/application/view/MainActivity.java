@@ -30,7 +30,7 @@ public class MainActivity extends DaggerAppCompatActivity {
         Log.v("",getValue);
 
         Fragment mFragment = null;
-        mFragment = new ListFragment();
+        mFragment = new ListFragment(db);
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.frameLayout, mFragment).commit();
@@ -44,7 +44,7 @@ public class MainActivity extends DaggerAppCompatActivity {
 
 
         Fragment mFragment = null;
-        mFragment = new AddEditFragment();
+        mFragment = new AddEditFragment(db);
         mFragment.setArguments(args);
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
@@ -54,7 +54,7 @@ public class MainActivity extends DaggerAppCompatActivity {
     public void jumpListFragment(){
 
         Fragment mFragment = null;
-        mFragment = new ListFragment();
+        mFragment = new ListFragment(db);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
