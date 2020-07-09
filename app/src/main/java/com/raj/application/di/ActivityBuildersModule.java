@@ -17,12 +17,16 @@ public abstract class ActivityBuildersModule {
     abstract MainActivity mainActivity();
 
     @Provides
-    static String getValue(){
+    static String getValue() {
         return "Test DI is working or not";
-    };
+    }
+
+    ;
 
     @Provides
-    static AppDatabase getDB(Application application){
+    static AppDatabase getDB(Application application) {
         return (AppDatabase) AppDatabase.getAppDatabase(application);
-    };
+    }
+
+    ;
 }

@@ -25,37 +25,37 @@ import com.raj.application.db.User;
 public class AddEditFragment extends Fragment {
 
     private AddEditFragmentViewModel listFragmentViewModel;
-    private EditText edt_name,edt_email;
+    private EditText edt_name, edt_email;
     private Button btn_add_edit;
-    private boolean update=false;
-    private boolean forADD=false;
-    private boolean forUpdate=false;
+    private boolean update = false;
+    private boolean forADD = false;
+    private boolean forUpdate = false;
     private int value;
     private User mUser;
-    private boolean edit=false;
+    private boolean edit = false;
     FragmentAddEditBinding binding;
 
     private AppDatabase db;
 
     public AddEditFragment(AppDatabase db) {
-        this.db=db;
+        this.db = db;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-         value = getArguments().getInt("position");
-        if(value!=-999){
-            edit=true;
+        value = getArguments().getInt("position");
+        if (value != -999) {
+            edit = true;
         }
-        mUser=new User();
+        mUser = new User();
         mUser.setEmail("");
         mUser.setName("");
         binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_add_edit, container, false);
         View view = binding.getRoot();
-        binding=DataBindingUtil.bind(view);
+        binding = DataBindingUtil.bind(view);
         binding.setAddeditfragment(this);
         binding.setView(view);
         binding.setUser(mUser);
@@ -67,16 +67,15 @@ public class AddEditFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        listFragmentViewModel=new ViewModelProvider(getActivity()).get(AddEditFragmentViewModel.class);
+        listFragmentViewModel = new ViewModelProvider(getActivity()).get(AddEditFragmentViewModel.class);
 
-        edt_name =(EditText)getActivity().findViewById(R.id.edt_name);
-        edt_email =(EditText)getActivity().findViewById(R.id.edt_email);
-        btn_add_edit=(Button)getActivity().findViewById(R.id.btn_add_edit);
+        edt_name = (EditText) getActivity().findViewById(R.id.edt_name);
+        edt_email = (EditText) getActivity().findViewById(R.id.edt_email);
+        btn_add_edit = (Button) getActivity().findViewById(R.id.btn_add_edit);
 
-        if(edit){
+        if (edit) {
             btn_add_edit.setText("Update");
-        }
-        else{
+        } else {
             btn_add_edit.setText("Add");
         }
 
@@ -84,11 +83,11 @@ public class AddEditFragment extends Fragment {
         listFragmentViewModel.userList.observe(this, new Observer() {
             @Override
             public void onChanged(Object userList) {
-                Log.v("","");
-                mUser=new User();
+                Log.v("", "");
+                mUser = new User();
 
-                if(update)
-               ((MainActivity)getActivity()).jumpListFragment();
+                if (update)
+                    ((MainActivity) getActivity()).jumpListFragment();
 
             }
         });
@@ -96,8 +95,8 @@ public class AddEditFragment extends Fragment {
         listFragmentViewModel.user.observe(this, new Observer() {
             @Override
             public void onChanged(Object userObj) {
-                Log.v("","");
-                if(edit) {
+                Log.v("", "");
+                if (edit) {
                     mUser = (User) userObj;
                     binding.setUser(mUser);
                 }
@@ -115,17 +114,22 @@ public class AddEditFragment extends Fragment {
 //            }
 //        });
 
-        if(edit){
-            listFragmentViewModel.setUserIdForEditUser(value,db);
+        if (edit) {
+            listFragmentViewModel.setUserIdForEditUser(value, db);
         }
 
     }
 
-    public void onAddEditButtonClick(View view){
-                  mUser.setName(edt_name.getText().toString());
-                mUser.setEmail(edt_email.getText().toString());
-                update=true;
-                listFragmentViewModel.setUser(mUser,db);
+    public void onAddEditButtonClick(View view) {
+        mUser.setName(edt_name.getText().toString());
+        mUser.setEmail(edt_email.getText().toString());
+        update = true;
+        listFragmentViewModel.setUser(mUser, db);
 
     }
+
+    public void onBackClick(View view) {
+        ((MainActivity) getActivity()).jumpListFragment();
+    }
+
 }

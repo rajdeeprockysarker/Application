@@ -16,8 +16,8 @@ import com.raj.application.db.User;
 
 public class AddEditFragmentViewModel extends AndroidViewModel {
 
-    private MutableLiveData<User> insertUpdateUser= new MutableLiveData<>();
-    private MutableLiveData<Integer> userId= new MutableLiveData<>();
+    private MutableLiveData<User> insertUpdateUser = new MutableLiveData<>();
+    private MutableLiveData<Integer> userId = new MutableLiveData<>();
     Context cntx;
     AppDatabase db;
 
@@ -25,7 +25,7 @@ public class AddEditFragmentViewModel extends AndroidViewModel {
     public LiveData userList = Transformations.map(insertUpdateUser, new Function() {
         @Override
         public Object apply(Object user) {
-             new Repository().insertData(db,insertUpdateUser.getValue());
+            new Repository().insertData(db, insertUpdateUser.getValue());
             return new Repository().getListData(db);
         }
     });
@@ -34,34 +34,34 @@ public class AddEditFragmentViewModel extends AndroidViewModel {
         @Override
         public Object apply(Object user) {
 
-            return new Repository().getListData(db,userId.getValue());
+            return new Repository().getListData(db, userId.getValue());
         }
     });
 
     public AddEditFragmentViewModel(@NonNull Application application) {
 
         super(application);
-        cntx=application.getApplicationContext();
-       // db= (AppDatabase) AppDatabase.getAppDatabase(cntx);
+        cntx = application.getApplicationContext();
+        // db= (AppDatabase) AppDatabase.getAppDatabase(cntx);
     }
 
-    public void setUser(User mUser,AppDatabase db){
+    public void setUser(User mUser, AppDatabase db) {
 
-        if(insertUpdateUser==null){
-            insertUpdateUser= new MutableLiveData<>();
+        if (insertUpdateUser == null) {
+            insertUpdateUser = new MutableLiveData<>();
         }
-        this.db=db;
+        this.db = db;
         insertUpdateUser.postValue(mUser);
 
     }
 
 
-    public void setUserIdForEditUser(int id, AppDatabase db){
+    public void setUserIdForEditUser(int id, AppDatabase db) {
 
-        if(userId==null){
-            userId= new MutableLiveData<>();
+        if (userId == null) {
+            userId = new MutableLiveData<>();
         }
-        this.db=db;
+        this.db = db;
         userId.postValue(id);
 
     }

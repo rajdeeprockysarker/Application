@@ -15,11 +15,11 @@ public class User extends BaseObservable {
 
     @Bindable
     @ColumnInfo(name = "name")
-    private String name="";
+    private String name = "";
 
     @Bindable
     @ColumnInfo(name = "email")
-    private String email="";
+    private String email = "";
 
 
     public int getUid() {

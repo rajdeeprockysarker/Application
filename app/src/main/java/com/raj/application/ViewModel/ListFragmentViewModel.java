@@ -19,17 +19,16 @@ import javax.inject.Inject;
 
 public class ListFragmentViewModel extends AndroidViewModel {
 
-    private MutableLiveData<User> insertUser= new MutableLiveData<>();
-    private MutableLiveData<Boolean> getinitialData= new MutableLiveData<>();
+    private MutableLiveData<User> insertUser = new MutableLiveData<>();
+    private MutableLiveData<Boolean> getinitialData = new MutableLiveData<>();
     Context cntx;
     AppDatabase db;
-
 
 
     public LiveData userList = Transformations.map(insertUser, new Function() {
         @Override
         public Object apply(Object user) {
-             new Repository().insertData(db,insertUser.getValue());
+            new Repository().insertData(db, insertUser.getValue());
             return new Repository().getListData(db);
         }
     });
@@ -46,15 +45,15 @@ public class ListFragmentViewModel extends AndroidViewModel {
     public ListFragmentViewModel(@NonNull Application application) {
 
         super(application);
-        cntx=application.getApplicationContext();
-       // db= (AppDatabase) AppDatabase.getAppDatabase(cntx);
+        cntx = application.getApplicationContext();
+        // db= (AppDatabase) AppDatabase.getAppDatabase(cntx);
     }
 
-    public void getInitialData(Boolean initialData,AppDatabase db){
-        if(getinitialData==null){
-            getinitialData= new MutableLiveData<>();
+    public void getInitialData(Boolean initialData, AppDatabase db) {
+        if (getinitialData == null) {
+            getinitialData = new MutableLiveData<>();
         }
-        this.db=db;
+        this.db = db;
         getinitialData.postValue(initialData);
     }
 

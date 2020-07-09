@@ -44,19 +44,19 @@ public class ListFragment extends Fragment implements OnRecyclerItemClickListene
     public FragmentListBinding fragmentListBinding;
 
     public ListFragment(AppDatabase db) {
-        this.db=db;
+        this.db = db;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-      //  return inflater.inflate(R.layout.fragment_list, container, false);
+        //  return inflater.inflate(R.layout.fragment_list, container, false);
 
         fragmentListBinding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_list, container, false);
         View view = fragmentListBinding.getRoot();
-        fragmentListBinding=DataBindingUtil.bind(view);
+        fragmentListBinding = DataBindingUtil.bind(view);
         fragmentListBinding.setListFragment(this);
         fragmentListBinding.setView(view);
         return view;
@@ -68,29 +68,28 @@ public class ListFragment extends Fragment implements OnRecyclerItemClickListene
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        listFragmentViewModel=new ViewModelProvider(getActivity()).get(ListFragmentViewModel.class);
+        listFragmentViewModel = new ViewModelProvider(getActivity()).get(ListFragmentViewModel.class);
 
 
         recyclerView = (RecyclerView) getActivity().findViewById(R.id.recycler_view);
-        fab_add=(FloatingActionButton)getActivity().findViewById(R.id.fab_add);
+        fab_add = (FloatingActionButton) getActivity().findViewById(R.id.fab_add);
 
-        mAdapter = new UserListAdapter(this,userList);
+        mAdapter = new UserListAdapter(this, userList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
 
-
-      //  AppDatabase db= (AppDatabase) AppDatabase.getAppDatabase(getActivity());
+        //  AppDatabase db= (AppDatabase) AppDatabase.getAppDatabase(getActivity());
 
         listFragmentViewModel.userList.observe(this, new Observer() {
             @Override
             public void onChanged(Object userList) {
-                Log.v("","");
+                Log.v("", "");
 
-                ArrayList<User> mUlerListInsideObserver=(ArrayList<User>)userList;
-                mAdapter = new UserListAdapter(ListFragment.this,mUlerListInsideObserver);
+                ArrayList<User> mUlerListInsideObserver = (ArrayList<User>) userList;
+                mAdapter = new UserListAdapter(ListFragment.this, mUlerListInsideObserver);
                 recyclerView.setAdapter(mAdapter);
             }
         });
@@ -98,10 +97,10 @@ public class ListFragment extends Fragment implements OnRecyclerItemClickListene
         listFragmentViewModel.userInitialList.observe(this, new Observer() {
             @Override
             public void onChanged(Object userList) {
-                Log.v("","");
+                Log.v("", "");
 
-                ArrayList<User> mUlerListInsideObserver=(ArrayList<User>)userList;
-                mAdapter = new UserListAdapter(ListFragment.this,mUlerListInsideObserver);
+                ArrayList<User> mUlerListInsideObserver = (ArrayList<User>) userList;
+                mAdapter = new UserListAdapter(ListFragment.this, mUlerListInsideObserver);
                 recyclerView.setAdapter(mAdapter);
             }
         });
@@ -110,7 +109,7 @@ public class ListFragment extends Fragment implements OnRecyclerItemClickListene
 //        user.setName("Raj12345678978978979797887");
 //        user.setEmail("Raj");
 //
-        listFragmentViewModel.getInitialData(true,db);
+        listFragmentViewModel.getInitialData(true, db);
 
 
 //        fab_add.setOnClickListener(new View.OnClickListener() {
@@ -123,16 +122,14 @@ public class ListFragment extends Fragment implements OnRecyclerItemClickListene
     }
 
 
-
-
     @Override
     public void onClickItem(int position) {
-        ((MainActivity)getActivity()).jumpAddEditFragment(position);
+        ((MainActivity) getActivity()).jumpAddEditFragment(position);
     }
 
 
-    public void onClickFloatingButton(View view){
-        Log.v("xxcvxc","cvxcv");
-        ((MainActivity)getActivity()).jumpAddEditFragment(-999);
+    public void onClickFloatingButton(View view) {
+        Log.v("xxcvxc", "cvxcv");
+        ((MainActivity) getActivity()).jumpAddEditFragment(-999);
     }
 }

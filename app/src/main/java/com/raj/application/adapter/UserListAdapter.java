@@ -29,6 +29,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView name, email;
         public LinearLayout lin_container;
+
         public MyViewHolder(View view) {
             super(view);
             name = (TextView) view.findViewById(R.id.name);
@@ -41,7 +42,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
 
     public UserListAdapter(OnRecyclerItemClickListener minter, List<User> usersList) {
         this.usersList = usersList;
-        this.minter=minter;
+        this.minter = minter;
     }
 
     @Override
@@ -52,7 +53,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
                 LayoutInflater.from(parent.getContext()),
                 R.layout.list_row, parent, false);
         View view = listRowBinding.getRoot();
-        listRowBinding=DataBindingUtil.bind(view);
+        listRowBinding = DataBindingUtil.bind(view);
         listRowBinding.setUser(new User());
         listRowBinding.setUserListAdapter(this);
         listRowBinding.setView(view);
@@ -80,7 +81,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
         return usersList.size();
     }
 
-    public void onContainerClick(View view,User mUser){
+    public void onContainerClick(View view, User mUser) {
         minter.onClickItem(mUser.getUid());
     }
 

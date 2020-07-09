@@ -9,17 +9,17 @@ import java.util.List;
 public class Repository {
 
 
-    public List<User> getListData(AppDatabase db){
+    public List<User> getListData(AppDatabase db) {
 
         return db.userDao().getAll();
     }
 
-    public void insertData(AppDatabase db,User mUser){
+    public void insertData(AppDatabase db, User mUser) {
         db.userDao().insertAll(mUser);
     }
 
 
-    public User getListData(AppDatabase db,int id){
+    public User getListData(AppDatabase db, int id) {
 
         return db.userDao().findUserByUID(id);
     }

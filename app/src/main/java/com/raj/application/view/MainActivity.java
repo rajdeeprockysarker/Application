@@ -27,7 +27,7 @@ public class MainActivity extends DaggerAppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.v("",getValue);
+        Log.v("", getValue);
 
         Fragment mFragment = null;
         mFragment = new ListFragment(db);
@@ -37,7 +37,7 @@ public class MainActivity extends DaggerAppCompatActivity {
 
     }
 
-    public void jumpAddEditFragment(int position){
+    public void jumpAddEditFragment(int position) {
 
         Bundle args = new Bundle();
         args.putInt("position", position);
@@ -51,7 +51,7 @@ public class MainActivity extends DaggerAppCompatActivity {
                 .replace(R.id.frameLayout, mFragment).commit();
     }
 
-    public void jumpListFragment(){
+    public void jumpListFragment() {
 
         Fragment mFragment = null;
         mFragment = new ListFragment(db);
