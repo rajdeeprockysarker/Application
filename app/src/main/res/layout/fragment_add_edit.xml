@@ -10,6 +10,13 @@
             name="user"
             type="com.raj.application.db.User" />
 
+        <variable
+            name="view"
+            type="android.view.View" />
+        <variable
+            name="addeditfragment"
+            type="com.raj.application.view.AddEditFragment" />
+
 
     </data>
 
@@ -35,6 +42,8 @@
         <Button
             android:id="@+id/btn_add_edit"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:onClick="@{()->addeditfragment.onAddEditButtonClick(view)}"
+            />
     </LinearLayout>
 </layout>

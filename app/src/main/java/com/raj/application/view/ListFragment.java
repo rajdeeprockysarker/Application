@@ -3,7 +3,9 @@ package com.raj.application.view;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -21,6 +23,7 @@ import com.raj.application.R;
 import com.raj.application.ViewModel.ListFragmentViewModel;
 
 import com.raj.application.adapter.UserListAdapter;
+import com.raj.application.databinding.FragmentListBinding;
 import com.raj.application.db.AppDatabase;
 import com.raj.application.db.User;
 
@@ -38,6 +41,7 @@ public class ListFragment extends Fragment implements OnRecyclerItemClickListene
     private ListFragmentViewModel listFragmentViewModel;
     private FloatingActionButton fab_add;
     private AppDatabase db;
+    public FragmentListBinding fragmentListBinding;
 
     public ListFragment(AppDatabase db) {
         this.db=db;
@@ -47,10 +51,15 @@ public class ListFragment extends Fragment implements OnRecyclerItemClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_list, container, false);
+      //  return inflater.inflate(R.layout.fragment_list, container, false);
 
-
-
+        fragmentListBinding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_list, container, false);
+        View view = fragmentListBinding.getRoot();
+        fragmentListBinding=DataBindingUtil.bind(view);
+        fragmentListBinding.setListFragment(this);
+        fragmentListBinding.setView(view);
+        return view;
 
     }
 
@@ -104,12 +113,12 @@ public class ListFragment extends Fragment implements OnRecyclerItemClickListene
         listFragmentViewModel.getInitialData(true,db);
 
 
-        fab_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((MainActivity)getActivity()).jumpAddEditFragment(-999);
-            }
-        });
+//        fab_add.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ((MainActivity)getActivity()).jumpAddEditFragment(-999);
+//            }
+//        });
 
     }
 
@@ -119,5 +128,11 @@ public class ListFragment extends Fragment implements OnRecyclerItemClickListene
     @Override
     public void onClickItem(int position) {
         ((MainActivity)getActivity()).jumpAddEditFragment(position);
+    }
+
+
+    public void onClickFloatingButton(View view){
+        Log.v("xxcvxc","cvxcv");
+        ((MainActivity)getActivity()).jumpAddEditFragment(-999);
     }
 }

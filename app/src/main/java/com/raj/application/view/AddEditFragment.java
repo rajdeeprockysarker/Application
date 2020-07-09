@@ -55,6 +55,9 @@ public class AddEditFragment extends Fragment {
         binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_add_edit, container, false);
         View view = binding.getRoot();
+        binding=DataBindingUtil.bind(view);
+        binding.setAddeditfragment(this);
+        binding.setView(view);
         binding.setUser(mUser);
         return view;
 
@@ -100,21 +103,29 @@ public class AddEditFragment extends Fragment {
                 }
             }
         });
-
-        btn_add_edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                mUser.setName(edt_name.getText().toString());
-                mUser.setEmail(edt_email.getText().toString());
-                update=true;
-                listFragmentViewModel.setUser(mUser,db);
-            }
-        });
+//
+//        btn_add_edit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                mUser.setName(edt_name.getText().toString());
+//                mUser.setEmail(edt_email.getText().toString());
+//                update=true;
+//                listFragmentViewModel.setUser(mUser,db);
+//            }
+//        });
 
         if(edit){
             listFragmentViewModel.setUserIdForEditUser(value,db);
         }
+
+    }
+
+    public void onAddEditButtonClick(View view){
+                  mUser.setName(edt_name.getText().toString());
+                mUser.setEmail(edt_email.getText().toString());
+                update=true;
+                listFragmentViewModel.setUser(mUser,db);
 
     }
 }
