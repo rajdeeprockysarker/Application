@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,13 +21,15 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
 
     private OnRecyclerItemClickListener minter;
 
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView name, email;
-
+        public LinearLayout lin_container;
         public MyViewHolder(View view) {
             super(view);
             name = (TextView) view.findViewById(R.id.name);
             email = (TextView) view.findViewById(R.id.email);
+            lin_container = (LinearLayout) view.findViewById(R.id.lin_container);
 
         }
     }
@@ -51,13 +54,14 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
         holder.name.setText(user.getName());
         holder.email.setText(user.getEmail());
 
-        holder.name.setOnClickListener(new View.OnClickListener() {
+        holder.lin_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.v("pos","poos"+position);
                 minter.onClickItem(user.getUid());
             }
         });
+
 
     }
 

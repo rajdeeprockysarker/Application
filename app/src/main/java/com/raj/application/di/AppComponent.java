@@ -3,7 +3,7 @@ package com.raj.application.di;
 import android.app.Application;
 
 
-import com.raj.application.BaseApplication;
+import com.raj.application.application.BaseApplication;
 
 import dagger.BindsInstance;
 import dagger.Component;

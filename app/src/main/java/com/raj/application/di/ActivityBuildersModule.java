@@ -14,11 +14,11 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class ActivityBuildersModule {
 
     @ContributesAndroidInjector
-    abstract MainActivity authActivity();
+    abstract MainActivity mainActivity();
 
     @Provides
     static String getValue(){
-        return "123";
+        return "Test DI is working or not";
     };
 
     @Provides

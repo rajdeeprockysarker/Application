@@ -1,4 +1,4 @@
-package com.raj.application;
+package com.raj.application.application;
 
 import com.raj.application.di.DaggerAppComponent;
 

@@ -56,7 +56,7 @@ public class AddEditFragmentViewModel extends AndroidViewModel {
     }
 
 
-    public void setUserId(int id,AppDatabase db){
+    public void setUserIdForEditUser(int id, AppDatabase db){
 
         if(userId==null){
             userId= new MutableLiveData<>();

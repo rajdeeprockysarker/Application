@@ -113,7 +113,7 @@ public class AddEditFragment extends Fragment {
         });
 
         if(edit){
-            listFragmentViewModel.setUserId(value,db);
+            listFragmentViewModel.setUserIdForEditUser(value,db);
         }
 
     }
