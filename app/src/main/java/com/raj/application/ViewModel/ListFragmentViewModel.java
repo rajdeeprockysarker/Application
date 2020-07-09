@@ -21,6 +21,7 @@ public class ListFragmentViewModel extends AndroidViewModel {
 
     private MutableLiveData<User> insertUser = new MutableLiveData<>();
     private MutableLiveData<Boolean> getinitialData = new MutableLiveData<>();
+    private MutableLiveData<Integer> deleteUser = new MutableLiveData<>();
     Context cntx;
     AppDatabase db;
 
@@ -33,6 +34,14 @@ public class ListFragmentViewModel extends AndroidViewModel {
         }
     });
 
+    public LiveData deleteAfterList = Transformations.map(deleteUser, new Function() {
+        @Override
+        public Object apply(Object user) {
+            User mUser=new Repository().getListData(db, deleteUser.getValue());
+            new Repository().deleteData(db,mUser);
+            return new Repository().getListData(db);
+        }
+    });
 
     public LiveData userInitialList = Transformations.map(getinitialData, new Function() {
         @Override
@@ -57,4 +66,16 @@ public class ListFragmentViewModel extends AndroidViewModel {
         getinitialData.postValue(initialData);
     }
 
+
+
+
+    public void deleteUserIdForEditUser(int id, AppDatabase db) {
+
+        if (deleteUser == null) {
+            deleteUser = new MutableLiveData<>();
+        }
+        this.db = db;
+        deleteUser.postValue(id);
+
+    }
 }

@@ -18,6 +18,10 @@ public class Repository {
         db.userDao().insertAll(mUser);
     }
 
+    public void deleteData(AppDatabase db, User mUser) {
+        db.userDao().delete(mUser);
+    }
+
 
     public User getListData(AppDatabase db, int id) {
 

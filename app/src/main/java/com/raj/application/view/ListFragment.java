@@ -1,9 +1,13 @@
 package com.raj.application.view;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
@@ -101,6 +105,19 @@ public class ListFragment extends Fragment implements OnRecyclerItemClickListene
                 recyclerView.setAdapter(mAdapter);
             }
         });
+        listFragmentViewModel.deleteAfterList.observe(this, new Observer() {
+            @Override
+            public void onChanged(Object userList) {
+                Log.v("", "");
+
+                ArrayList<User> mUlerListInsideObserver = (ArrayList<User>) userList;
+                mAdapter = new UserListAdapter(ListFragment.this, mUlerListInsideObserver);
+                recyclerView.setAdapter(mAdapter);
+            }
+        });
+
+
+
 
         listFragmentViewModel.getInitialData(true, db);
 
@@ -111,11 +128,48 @@ public class ListFragment extends Fragment implements OnRecyclerItemClickListene
 
     @Override
     public void onClickItem(int position) {
-        ((MainActivity) getActivity()).jumpAddEditFragment(position);
+       // ((MainActivity) getActivity()).jumpAddEditFragment(position);
+
+      //  listFragmentViewModel.deleteUserIdForEditUser(position,db);
+
+        AlertDFragment alertdFragment = new AlertDFragment(((MainActivity) getActivity()),listFragmentViewModel,position,db);
+        // Show Alert DialogFragment
+        alertdFragment.show(getActivity().getSupportFragmentManager(), "Alert Dialog Fragment");
+
+
     }
 
 
     public void onClickFloatingButton(View view) {
         ((MainActivity) getActivity()).jumpAddEditFragment(-999);
+    }
+
+
+    public static class AlertDFragment extends DialogFragment {
+        MainActivity activity; ListFragmentViewModel listFragmentViewModel; int position; AppDatabase db;
+        public AlertDFragment(MainActivity activity, ListFragmentViewModel listFragmentViewModel, int position, AppDatabase db) {
+            this.activity=activity;this.listFragmentViewModel=listFragmentViewModel;this.position=position;this.db=db;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            return new AlertDialog.Builder(getActivity())
+
+                    // Positive button
+                    .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Do something else
+                            listFragmentViewModel.deleteUserIdForEditUser(position,db);
+                        }
+                    })
+
+                    // Negative Button
+                    .setNegativeButton("Update", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,	int which) {
+                            // Do something else
+                            ((MainActivity) getActivity()).jumpAddEditFragment(position);
+                        }
+                    }).create();
+        }
     }
 }
