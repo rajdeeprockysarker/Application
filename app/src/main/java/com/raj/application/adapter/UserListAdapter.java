@@ -7,9 +7,12 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.adapters.AdapterViewBindingAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.raj.application.R;
+import com.raj.application.databinding.ListRowBinding;
 import com.raj.application.db.User;
 import com.raj.application.contract.OnRecyclerItemClickListener;
 
@@ -21,6 +24,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
 
     private OnRecyclerItemClickListener minter;
 
+    ListRowBinding listRowBinding;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView name, email;
@@ -42,25 +46,31 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_row, parent, false);
 
-        return new MyViewHolder(itemView);
+
+        listRowBinding = DataBindingUtil.inflate(
+                LayoutInflater.from(parent.getContext()),
+                R.layout.list_row, parent, false);
+        View view = listRowBinding.getRoot();
+        listRowBinding=DataBindingUtil.bind(view);
+        listRowBinding.setUser(new User());
+        listRowBinding.setUserListAdapter(this);
+        listRowBinding.setView(view);
+        return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final User user = usersList.get(position);
-        holder.name.setText(user.getName());
-        holder.email.setText(user.getEmail());
 
-        holder.lin_container.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.v("pos","poos"+position);
-                minter.onClickItem(user.getUid());
-            }
-        });
+        listRowBinding.setUser(user);
+//        holder.lin_container.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.v("pos","poos"+position);
+//                minter.onClickItem(user.getUid());
+//            }
+//        });
 
 
     }
@@ -68,6 +78,10 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
     @Override
     public int getItemCount() {
         return usersList.size();
+    }
+
+    public void onContainerClick(View view,User mUser){
+        minter.onClickItem(mUser.getUid());
     }
 
 }

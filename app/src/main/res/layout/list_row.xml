@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="user"
+            type="com.raj.application.db.User" />
+        <variable
+            name="view"
+            type="android.view.View" />
+        <variable
+            name="userListAdapter"
+            type="com.raj.application.adapter.UserListAdapter" />
+    </data>
+
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -18,6 +35,7 @@
             android:id="@+id/lin_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:onClick="@{()->userListAdapter.onContainerClick(view,user)}"
             android:orientation="vertical">
 
             <TextView
@@ -26,7 +44,7 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
                 android:layout_weight="1"
-                android:text="Name"
+                android:text="@{user.name}"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:textSize="16dp"
@@ -40,9 +58,10 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:text="email" />
+                android:text="@{user.email}" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
 </RelativeLayout>
+</layout>
