@@ -50,6 +50,8 @@
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:text="@{user.name}"
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
@@ -61,6 +63,8 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
                     android:text="@{user.email}" />
             </LinearLayout>
 

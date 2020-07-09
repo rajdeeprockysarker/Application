@@ -74,9 +74,9 @@ public class AddEditFragment extends Fragment {
         btn_add_edit = (Button) getActivity().findViewById(R.id.btn_add_edit);
 
         if (edit) {
-            btn_add_edit.setText("Update");
+            btn_add_edit.setText(R.string.update);
         } else {
-            btn_add_edit.setText("Add");
+            btn_add_edit.setText(R.string.add);
         }
 
 

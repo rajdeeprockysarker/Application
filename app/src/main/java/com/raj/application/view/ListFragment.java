@@ -80,9 +80,6 @@ public class ListFragment extends Fragment implements OnRecyclerItemClickListene
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
-
-        //  AppDatabase db= (AppDatabase) AppDatabase.getAppDatabase(getActivity());
-
         listFragmentViewModel.userList.observe(this, new Observer() {
             @Override
             public void onChanged(Object userList) {
@@ -105,19 +102,9 @@ public class ListFragment extends Fragment implements OnRecyclerItemClickListene
             }
         });
 
-//        User user = new User();
-//        user.setName("Raj12345678978978979797887");
-//        user.setEmail("Raj");
-//
         listFragmentViewModel.getInitialData(true, db);
 
 
-//        fab_add.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                ((MainActivity)getActivity()).jumpAddEditFragment(-999);
-//            }
-//        });
 
     }
 
@@ -129,7 +116,6 @@ public class ListFragment extends Fragment implements OnRecyclerItemClickListene
 
 
     public void onClickFloatingButton(View view) {
-        Log.v("xxcvxc", "cvxcv");
         ((MainActivity) getActivity()).jumpAddEditFragment(-999);
     }
 }

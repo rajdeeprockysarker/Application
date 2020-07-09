@@ -27,14 +27,10 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
     ListRowBinding listRowBinding;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView name, email;
-        public LinearLayout lin_container;
+
 
         public MyViewHolder(View view) {
             super(view);
-            name = (TextView) view.findViewById(R.id.name);
-            email = (TextView) view.findViewById(R.id.email);
-            lin_container = (LinearLayout) view.findViewById(R.id.lin_container);
 
         }
     }
